@@ -5,6 +5,8 @@ typedef struct snake
 {
 	int head_x;
 	int head_y;
+	int tail_x;
+	int tail_y;
 } snake;
 
 snake snake_init(int w, int h);
