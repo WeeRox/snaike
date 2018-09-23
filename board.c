@@ -1,9 +1,9 @@
 #include "board.h"
 #include "draw.h"
 
-board board_init(int w, int h)
+board board_init(int w, int h, snake snake)
 {
-	board board = {.w = w, .h = h};
+	board board = {.w = w, .h = h, .snake = snake};
 	return board;
 }
 

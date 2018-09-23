@@ -1,13 +1,16 @@
 #ifndef __SNAIKE_BOARD_H
 #define __SNAIKE_BOARD_H
 
+#include "snake.h"
+
 typedef struct board
 {
 	int w;
 	int h;
+	snake snake;
 } board;
 
-board board_init(int w, int h);
+board board_init(int w, int h, snake snake);
 void board_print(board board);
 void board_update(board board);
 
