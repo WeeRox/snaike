@@ -3,11 +3,11 @@
 
 typedef struct board
 {
-	int width;
-	int height;
+	int w;
+	int h;
 } board;
 
-board board_init(int width, int height);
+board board_init(int w, int h);
 void board_print(board board);
 void board_update(board board);
 
