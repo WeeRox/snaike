@@ -19,4 +19,7 @@ void board_print(board board)
 			}
 		}
 	}
+
+	draw(board.snake.tail_x + 1, board.snake.tail_y + 1, 't');
+	draw(board.snake.head_x + 1, board.snake.head_y + 1, 'h');
 }
