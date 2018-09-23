@@ -35,3 +35,8 @@ void draw(int x, int y, char c)
 	curr_x = x + 1;
 	curr_y = y;
 }
+
+void draw_reset()
+{
+	draw(0, max_y, '\n');
+}
