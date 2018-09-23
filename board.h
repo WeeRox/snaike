@@ -7,11 +7,10 @@ typedef struct board
 {
 	int w;
 	int h;
-	snake snake;
+	snake *snake;
 } board;
 
-board board_init(int w, int h, snake snake);
+board board_init(int w, int h, snake *snake);
 void board_print(board board);
-void board_update(board board);
 
 #endif /* __SNAIKE_BOARD_H */

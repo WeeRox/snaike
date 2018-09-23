@@ -11,13 +11,11 @@ typedef enum direction
 
 typedef struct snake
 {
-	int head_x;
-	int head_y;
-	int tail_x;
-	int tail_y;
+	int length;
+	int **snake;
 	direction direction;
 } snake;
 
-snake snake_init(int w, int h);
+snake *snake_init(int w, int h);
 
 #endif /* __SNAIKE_SNAKE_H */
