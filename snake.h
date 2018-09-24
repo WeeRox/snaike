@@ -17,5 +17,6 @@ typedef struct snake
 } snake;
 
 snake *snake_init(int w, int h);
+void snake_move(snake *snake);
 
 #endif /* __SNAIKE_SNAKE_H */
