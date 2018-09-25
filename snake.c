@@ -47,3 +47,22 @@ void snake_move(snake *snake)
 
 	snake->snake = new;
 }
+
+int snake_collision(snake *snake)
+{
+	int head_x = snake->snake[0][0];
+	int head_y = snake->snake[0][1];
+
+	for (int i = 1; i < snake->length; i++)
+	{
+		if (
+			snake->snake[i][0] == head_x && 
+			snake->snake[i][1] == head_y
+		)
+		{
+			return 1;
+		}
+	}
+
+	return 0;
+}
