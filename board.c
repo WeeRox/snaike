@@ -36,8 +36,8 @@ int board_collision(board board)
 	int head_y = board.snake->snake[0][1];
 
 	if (
-		head_x < 1 || head_x > board.w + 1 || 
-		head_y < 1 || head_y > board.h + 1
+		head_x < 0 || head_x >= board.w ||
+		head_y < 0 || head_y >= board.h
 	)
 	{
 		return 1;
