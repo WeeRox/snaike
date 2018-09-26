@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "board.h"
 #include "draw.h"
 
@@ -28,6 +29,7 @@ void board_print(board board)
 	{
 		draw(board.snake->snake[i][0] + 1, board.snake->snake[i][1] + 1, '0');
 	}
+	fflush(stdout);
 }
 
 int board_collision(board board)
