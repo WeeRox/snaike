@@ -17,6 +17,10 @@ void board_print(board board)
 			{
 				draw(i, j, '#');
 			}
+			else
+			{
+				draw(i, j, ' ');
+			}
 		}
 	}
 
