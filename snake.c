@@ -20,7 +20,7 @@ snake *snake_init(int w, int h)
 
 void snake_move(snake *snake)
 {
-	int **new  = malloc(sizeof(int *));
+	int **new = malloc(sizeof(int *) * snake->length);
 	new[0] = malloc(sizeof(int) * 2);
 
 	switch (snake->direction)
@@ -43,7 +43,7 @@ void snake_move(snake *snake)
 			break;
 	}
 
-	memcpy(new[1], snake->snake, snake->length - 1);
+	memcpy(&new[1], snake->snake, sizeof(int *) * (snake->length - 1));
 
 	snake->snake = new;
 }
