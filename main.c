@@ -16,7 +16,10 @@ int main(int argc, char **argv)
 	int width = 5;
 	int height = 5;
 	snake *snake = snake_init(width, height);
-	board board = board_init(width, height, snake);
+	food *food = food_init();
+	board board = board_init(width, height, food, snake);
+
+	food_generate(food, width, height);
 
 	board_print(board);
 
@@ -27,6 +30,13 @@ int main(int argc, char **argv)
 		{
 			return 1;
 		}
+
+		if (food_eaten(snake, food))
+		{
+			snake_grow(snake);
+			food_generate(food, width, height);
+		}
+
 		board_print(board);
 		nanosleep(&sleep, NULL);
 	}

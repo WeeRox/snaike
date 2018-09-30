@@ -2,9 +2,9 @@
 #include "board.h"
 #include "draw.h"
 
-board board_init(int w, int h, snake *snake)
+board board_init(int w, int h, food *food, snake *snake)
 {
-	board board = {.w = w, .h = h, .snake = snake};
+	board board = {.w = w, .h = h, .food = food, .snake = snake};
 	return board;
 }
 
@@ -24,6 +24,8 @@ void board_print(board board)
 			}
 		}
 	}
+
+	draw(board.food->x + 1, board.food->y + 1, '*');
 
 	for (int i = 0; i < board.snake->length; i++)
 	{
