@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	food *food = food_init();
 	board board = board_init(width, height, food, snake);
 
-	food_generate(food, width, height);
+	food_generate(food, snake, width, height);
 
 	board_print(board);
 
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 		if (food_eaten(snake, food))
 		{
 			snake_grow(snake);
-			food_generate(food, width, height);
+			food_generate(food, snake, width, height);
 		}
 
 		board_print(board);

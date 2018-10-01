@@ -7,10 +7,22 @@ food *food_init()
 	return food;
 }
 
-void food_generate(food *food, int w, int h)
+void food_generate(food *food, snake *snake, int w, int h)
 {
 	food->x = rand() % w;
 	food->y = rand() % h;
+
+	for (int i = 0; i < snake->length; i++)
+	{
+		if (
+			snake->snake[i][0] == food->x &&
+			snake->snake[i][1] == food->y
+		)
+		{
+			food_generate(food, snake, w, h);
+			break;
+		}
+	}
 }
 
 int food_eaten(snake *snake, food *food)

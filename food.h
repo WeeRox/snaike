@@ -10,7 +10,7 @@ typedef struct food
 } food;
 
 food *food_init();
-void food_generate(food *food, int w, int h);
+void food_generate(food *food, snake *snake, int w, int h);
 int food_eaten(snake *snake, food *food);
 
 #endif /* __SNAIKE_FOOD_H */
