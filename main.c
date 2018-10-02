@@ -21,10 +21,11 @@ int main(int argc, char **argv)
 
 	food_generate(food, snake, width, height);
 
-	board_print(board);
-
 	while (1)
 	{
+		board_print(board);
+		nanosleep(&sleep, NULL);
+
 		snake_move(snake);
 		if (snake_collision(snake) || board_collision(board))
 		{
@@ -36,9 +37,6 @@ int main(int argc, char **argv)
 			snake_grow(snake);
 			food_generate(food, snake, width, height);
 		}
-
-		board_print(board);
-		nanosleep(&sleep, NULL);
 	}
 
 	return 0;
