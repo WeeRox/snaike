@@ -1,7 +1,7 @@
 #ifndef __SNAIKE_FOOD_H
 #define __SNAIKE_FOOD_H
 
-#include "snake.h"
+struct board;
 
 typedef struct food
 {
@@ -10,7 +10,7 @@ typedef struct food
 } food;
 
 food *food_init();
-void food_generate(food *food, snake *snake, int w, int h);
-int food_eaten(snake *snake, food *food);
+void food_generate(struct board board);
+int food_eaten(struct board board);
 
 #endif /* __SNAIKE_FOOD_H */

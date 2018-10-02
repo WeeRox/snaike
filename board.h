@@ -12,7 +12,7 @@ typedef struct board
 	snake *snake;
 } board;
 
-board board_init(int w, int h, food *food, snake *snake);
+board board_init(int w, int h);
 void board_print(board board);
 int board_collision(board board);
 

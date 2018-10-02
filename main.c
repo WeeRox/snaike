@@ -1,6 +1,5 @@
 #include <time.h>
 #include <stdlib.h>
-#include "snake.h"
 #include "board.h"
 #include "draw.h"
 
@@ -15,27 +14,23 @@ int main(int argc, char **argv)
 
 	int width = 5;
 	int height = 5;
-	snake *snake = snake_init(width, height);
-	food *food = food_init();
-	board board = board_init(width, height, food, snake);
-
-	food_generate(food, snake, width, height);
+	board board = board_init(width, height);
 
 	while (1)
 	{
 		board_print(board);
 		nanosleep(&sleep, NULL);
 
-		snake_move(snake);
-		if (snake_collision(snake) || board_collision(board))
+		snake_move(board);
+		if (snake_collision(board) || board_collision(board))
 		{
 			return 1;
 		}
 
-		if (food_eaten(snake, food))
+		if (food_eaten(board))
 		{
-			snake_grow(snake);
-			food_generate(food, snake, width, height);
+			snake_grow(board);
+			food_generate(board);
 		}
 	}
 

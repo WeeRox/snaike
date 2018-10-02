@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "food.h"
+#include "board.h"
 
 food *food_init()
 {
@@ -7,29 +7,29 @@ food *food_init()
 	return food;
 }
 
-void food_generate(food *food, snake *snake, int w, int h)
+void food_generate(board board)
 {
-	food->x = rand() % w;
-	food->y = rand() % h;
+	board.food->x = rand() % board.w;
+	board.food->y = rand() % board.h;
 
-	for (int i = 0; i < snake->length; i++)
+	for (int i = 0; i < board.snake->length; i++)
 	{
 		if (
-			snake->snake[i][0] == food->x &&
-			snake->snake[i][1] == food->y
+			board.snake->snake[i][0] == board.food->x &&
+			board.snake->snake[i][1] == board.food->y
 		)
 		{
-			food_generate(food, snake, w, h);
+			food_generate(board);
 			break;
 		}
 	}
 }
 
-int food_eaten(snake *snake, food *food)
+int food_eaten(board board)
 {
 	if (
-		snake->snake[0][0] == food->x &&
-		snake->snake[0][1] == food->y
+		board.snake->snake[0][0] == board.food->x &&
+		board.snake->snake[0][1] == board.food->y
 	)
 	{
 		return 1;

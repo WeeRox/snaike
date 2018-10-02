@@ -1,6 +1,8 @@
 #ifndef __SNAIKE_SNAKE_H
 #define __SNAIKE_SNAKE_H
 
+struct board;
+
 typedef enum direction
 {
 	NORTH,
@@ -18,8 +20,8 @@ typedef struct snake
 } snake;
 
 snake *snake_init(int w, int h);
-void snake_move(snake *snake);
-void snake_grow(snake *snake);
-int snake_collision(snake *snake);
+void snake_move(struct board board);
+void snake_grow(struct board board);
+int snake_collision(struct board board);
 
 #endif /* __SNAIKE_SNAKE_H */

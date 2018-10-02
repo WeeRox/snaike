@@ -2,9 +2,13 @@
 #include "board.h"
 #include "draw.h"
 
-board board_init(int w, int h, food *food, snake *snake)
+board board_init(int w, int h)
 {
+	food *food = food_init();
+	snake *snake  = snake_init(w, h);
+
 	board board = {.w = w, .h = h, .food = food, .snake = snake};
+	food_generate(board);
 	return board;
 }
 
