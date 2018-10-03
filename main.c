@@ -12,9 +12,7 @@ int main(int argc, char **argv)
 	sleep.tv_sec = 0;
 	sleep.tv_nsec = 900000000;
 
-	int width = 5;
-	int height = 5;
-	board board = board_init(width, height);
+	board board = board_init();
 
 	board_border_print(board);
 

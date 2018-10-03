@@ -3,13 +3,15 @@
 #include "draw.h"
 
 #define BORDER 1
+#define WIDTH 5
+#define HEIGHT 5
 
-board board_init(int w, int h)
+board board_init()
 {
 	food *food = food_init();
-	snake *snake  = snake_init(w, h);
+	snake *snake  = snake_init(WIDTH, HEIGHT);
 
-	board board = {.w = w, .h = h, .food = food, .snake = snake};
+	board board = {.w = HEIGHT, .h = HEIGHT, .food = food, .snake = snake};
 	food_generate(board);
 	return board;
 }
