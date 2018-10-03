@@ -16,6 +16,8 @@ int main(int argc, char **argv)
 	int height = 5;
 	board board = board_init(width, height);
 
+	board_border_print(board);
+
 	while (1)
 	{
 		board_print(board);

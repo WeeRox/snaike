@@ -2,6 +2,8 @@
 #include "board.h"
 #include "draw.h"
 
+#define BORDER 1
+
 board board_init(int w, int h)
 {
 	food *food = food_init();
@@ -12,28 +14,28 @@ board board_init(int w, int h)
 	return board;
 }
 
-void board_print(board board)
+void board_border_print(board board)
 {
-	for (int i = 0; i < board.w + 2; i++)
+	for (int i = 0; i < board.w + (2 * BORDER); i++)
 	{
-		for (int j = 0; j < board.h + 2; j++)
+		for (int j = 0; j < board.h + (2 * BORDER); j++)
 		{
-			if (i == 0 || j == 0 || i == board.w + 1 || j == board.h + 1)
+			if (i < BORDER || j < BORDER || i >= board.w + BORDER || j >= board.h + BORDER)
 			{
 				draw(i, j, '#');
 			}
-			else
-			{
-				draw(i, j, ' ');
-			}
 		}
 	}
+}
 
-	draw(board.food->x + 1, board.food->y + 1, '*');
+void board_print(board board)
+{
+	draw(board.snake->pos_grow[0] + BORDER, board.snake->pos_grow[1] + BORDER, ' ');
+	draw(board.food->x + BORDER, board.food->y + BORDER, '*');
 
 	for (int i = 0; i < board.snake->length; i++)
 	{
-		draw(board.snake->snake[i][0] + 1, board.snake->snake[i][1] + 1, '0');
+		draw(board.snake->snake[i][0] + BORDER, board.snake->snake[i][1] + BORDER, '0');
 	}
 	fflush(stdout);
 }

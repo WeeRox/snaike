@@ -14,6 +14,7 @@ typedef struct board
 
 board board_init(int w, int h);
 void board_print(board board);
+void board_border_print(board board);
 int board_collision(board board);
 
 #endif /* __SNAIKE_BOARD_H */
