@@ -24,7 +24,7 @@ void board_border_print(board board)
 		{
 			if (i < BORDER || j < BORDER || i >= board.w + BORDER || j >= board.h + BORDER)
 			{
-				draw(i, j, '#');
+				draw(i, j, DRAW_BORDER);
 			}
 		}
 	}
@@ -32,12 +32,12 @@ void board_border_print(board board)
 
 void board_print(board board)
 {
-	draw(board.snake->pos_grow[0] + BORDER, board.snake->pos_grow[1] + BORDER, ' ');
-	draw(board.food->x + BORDER, board.food->y + BORDER, '*');
+	draw(board.snake->pos_grow[0] + BORDER, board.snake->pos_grow[1] + BORDER, DRAW_VOID);
+	draw(board.food->x + BORDER, board.food->y + BORDER, DRAW_FOOD);
 
 	for (int i = 0; i < board.snake->length; i++)
 	{
-		draw(board.snake->snake[i][0] + BORDER, board.snake->snake[i][1] + BORDER, '0');
+		draw(board.snake->snake[i][0] + BORDER, board.snake->snake[i][1] + BORDER, DRAW_SNAKE);
 	}
 	fflush(stdout);
 }

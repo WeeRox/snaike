@@ -4,11 +4,11 @@ int curr_x = 0;
 int curr_y = 0;
 int max_y = 0;
 
-void draw(int x, int y, char c)
+void draw(int x, int y, char *c)
 {
 	while (max_y < y)
 	{
-		draw(curr_x, max_y, '\n');
+		draw(curr_x, max_y, "\n");
 		max_y++;
 	}
 
@@ -30,7 +30,7 @@ void draw(int x, int y, char c)
 		printf("\x1B[%iB", y - curr_y);
 	}
 
-	printf("%c", c);
+	printf("%s", c);
 
 	curr_x = x + 1;
 	curr_y = y;
@@ -38,5 +38,5 @@ void draw(int x, int y, char c)
 
 void draw_reset()
 {
-	draw(0, max_y, '\n');
+	draw(0, max_y, "\n");
 }
