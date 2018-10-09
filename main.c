@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 		board_print(board);
 		nanosleep(&sleep, NULL);
 
-		direction direction = get_direction(board);
+		board.snake->direction = get_direction(board);
 
 		snake_move(board);
 		if (snake_collision(board) || board_collision(board))
