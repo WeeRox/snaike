@@ -8,7 +8,10 @@ typedef enum direction
 	NORTH,
 	SOUTH,
 	EAST,
-	WEST
+	WEST,
+	FORWARD,
+	RIGHT,
+	LEFT
 } direction;
 
 typedef struct snake
@@ -23,5 +26,7 @@ snake *snake_init(int w, int h);
 void snake_move(struct board board);
 void snake_grow(struct board board);
 int snake_collision(struct board board);
+
+direction direction_ltog(struct board board, direction local);
 
 #endif /* __SNAIKE_SNAKE_H */

@@ -83,3 +83,36 @@ int snake_collision(board board)
 
 	return 0;
 }
+
+direction direction_ltog(board board, direction local)
+{
+	switch (local)
+	{
+		case FORWARD:
+			return board.snake->direction;
+		case RIGHT:
+			switch (board.snake->direction)
+			{
+				case NORTH:
+					return EAST;
+				case SOUTH:
+					return WEST;
+				case EAST:
+					return SOUTH;
+				case WEST:
+					return NORTH;
+			}
+		case LEFT:
+			switch (board.snake->direction)
+			{
+				case NORTH:
+					return WEST;
+				case SOUTH:
+					return EAST;
+				case EAST:
+					return NORTH;
+				case WEST:
+					return SOUTH;
+			}
+	}
+}
