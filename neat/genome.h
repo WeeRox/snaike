@@ -3,6 +3,8 @@
 
 #include <hashmap.h>
 
+extern unsigned int innovation_number;
+
 enum type {
 	INPUT,
 	OUTPUT,
