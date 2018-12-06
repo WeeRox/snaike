@@ -5,18 +5,21 @@
 
 extern unsigned int innovation_number;
 
-enum type {
+enum type
+{
 	INPUT,
 	OUTPUT,
 	HIDDEN
 };
 
-struct node_gene {
+struct node_gene
+{
 	unsigned int id;
 	enum type type;
 };
 
-struct connection_gene {
+struct connection_gene
+{
 	unsigned int id; // also known as innovation number
 	struct node_gene *in;
 	struct node_gene *out;
@@ -24,7 +27,8 @@ struct connection_gene {
 	int enabled;
 };
 
-struct genome {
+struct genome
+{
 	struct hashmap *connection_genes;
 	struct hashmap *node_genes;
 };
