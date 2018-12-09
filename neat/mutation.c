@@ -4,8 +4,6 @@
 
 void mutate_weight(struct genome *genome)
 {
-	srand(time(NULL));
-
 	for (struct hashmap_iterator iter = hashmap_iterator(genome->connection_genes); iter != NULL; iter = hashmap_iterator_next(genome->connection_genes, iter))
 	{
 		if ((double)rand() / (double)RAND_MAX < MUTATION_WEIGHT_PROBABILITY)
