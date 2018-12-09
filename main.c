@@ -15,10 +15,12 @@ int main(int argc, char **argv)
 	atexit(draw_reset);
 	atexit(teardown);
 
+	#if TIME_MOVE > 0
 	struct timespec sleep;
 
 	sleep.tv_sec = 0;
-	sleep.tv_nsec = 900000000;
+	sleep.tv_nsec = TIME_MOVE * 1000000;
+	#endif /* TIME_MOVE > 0 */
 
 	board board = board_init();
 
@@ -27,7 +29,9 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		board_print(board);
+		#if TIME_MOVE > 0
 		nanosleep(&sleep, NULL);
+		#endif
 
 		board.snake->direction = get_direction(board);
 
