@@ -9,6 +9,8 @@ install-sh
 missing
 depcomp
 
+.dirstamp
+
 config.log
 config.status
 
