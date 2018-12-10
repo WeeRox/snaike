@@ -31,6 +31,8 @@ struct genome
 {
 	struct hashmap *connection_genes;
 	struct hashmap *node_genes;
+	struct node_gene **inputs;
+	struct node_gene **outputs;
 };
 
 #endif /* __SNAIKE_NEAT_GENOME_H */
