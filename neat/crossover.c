@@ -31,7 +31,7 @@ struct genome *crossover(struct genome *king, struct genome *queen)
 		struct connection_gene *parent_gene = iter->entry->value;
 		int enabled = 1;
 
-		struct connection_gene *tmp = hashmap_get(queen->connection_genes, parent_gene->id);
+		struct connection_gene *tmp = hashmap_get(queen->connection_genes, &parent_gene->id);
 
 		if (tmp != NULL)
 		{
@@ -60,9 +60,9 @@ struct genome *crossover(struct genome *king, struct genome *queen)
 		child_gene->weight = parent_gene->weight;
 		child_gene->enabled = enabled;
 
-		hashmap_put(prince->connection_genes, child_gene->id, child_gene);
-		hashmap_put(prince->node_genes, child_gene->in->id, child_gene->in);
-		hashmap_put(prince->node_genes, child_gene->out->id, child_gene->out);
+		hashmap_put(prince->connection_genes, &child_gene->id, child_gene);
+		hashmap_put(prince->node_genes, &child_gene->in->id, child_gene->in);
+		hashmap_put(prince->node_genes, &child_gene->out->id, child_gene->out);
 	}
 
 	return prince;

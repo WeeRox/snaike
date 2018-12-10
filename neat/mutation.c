@@ -24,7 +24,8 @@ void mutate_connection(struct genome *genome)
 	struct connection_gene *connection;
 	while (1)
 	{
-		connection = hashmap_get(genome->connection_genes, rand() % innovation_number);
+		unsigned int rand_id = rand() % innovation_number;
+		connection = hashmap_get(genome->connection_genes, &rand_id);
 		if (connection != NULL) {
 			if (connection->enabled == 1)
 			{
@@ -68,9 +69,9 @@ void mutate_connection(struct genome *genome)
 				second->enabled = 1;
 				connection->enabled = 0;
 
-				hashmap_put(genome->connection_genes, first->id, first);
-				hashmap_put(genome->connection_genes, second->id, second);
-				hashmap_put(genome->node_genes, new->id, new);
+				hashmap_put(genome->connection_genes, &first->id, first);
+				hashmap_put(genome->connection_genes, &second->id, second);
+				hashmap_put(genome->node_genes, &new->id, new);
 				return;
 			}
 		}
@@ -95,9 +96,11 @@ void mutate_node(struct genome *genome)
 	struct node_gene *from, *to;
 	while (1)
 	{
-		from = (struct node_gene *)hashmap_get(genome->node_genes, rand() % innovation_number);
-		to = (struct node_gene *)hashmap_get(genome->node_genes, rand() % innovation_number);
-		
+		unsigned int rand_from = rand() % innovation_number;
+		unsigned int rand_to = rand() % innovation_number;
+		from = (struct node_gene *)hashmap_get(genome->node_genes, &rand_from);
+		to = (struct node_gene *)hashmap_get(genome->node_genes, &rand_to);
+
 		if (from->id == to->id)
 		{
 			continue;
@@ -236,7 +239,7 @@ void mutate_node(struct genome *genome)
 		new->weight = ((2.0 * ((double)rand() / (double)RAND_MAX)) - 1.0);
 		new->enabled = 1;
 
-		hashmap_put(genome->connection_genes, new->id, new);
+		hashmap_put(genome->connection_genes, &new->id, new);
 		return;
 	}
 }
