@@ -1,14 +1,19 @@
 #include <hashmap.h>
+#include <stdlib.h>
 
-#define MUTATION_WEIGHT_PROBABILITY 0.5;
+#include "neat/mutation.h"
+
+#define MUTATION_WEIGHT_PROBABILITY 0.5
 
 void mutate_weight(struct genome *genome)
 {
-	for (struct hashmap_iterator iter = hashmap_iterator(genome->connection_genes); iter != NULL; iter = hashmap_iterator_next(genome->connection_genes, iter))
+	struct connection_gene *gene;
+	for (struct hashmap_iterator *iter = hashmap_iterator(genome->connection_genes); iter != NULL; iter = hashmap_iterator_next(genome->connection_genes, iter))
 	{
 		if ((double)rand() / (double)RAND_MAX < MUTATION_WEIGHT_PROBABILITY)
 		{
-			iter->entry->weight = iter->entry->weight * 
+			gene = iter->entry->value;
+			gene->weight = gene->weight * 
 					((2.0 * ((double)rand() / (double)RAND_MAX)) - 1.0);
 		}
 	}	
@@ -19,9 +24,9 @@ void mutate_connection(struct genome *genome)
 	struct connection_gene *connection;
 	while (1)
 	{
-		connection = (struct connection_gene *)hashmap_get(genome->connection_genes, ((double)rand() / (double)RAND_MAX) % innovation_number)
+		connection = hashmap_get(genome->connection_genes, rand() % innovation_number);
 		if (connection != NULL) {
-			if (connection->enabled = 1)
+			if (connection->enabled == 1)
 			{
 				struct node_gene *new;
 				if ((new = malloc(sizeof(struct node_gene))) == NULL)
@@ -90,8 +95,8 @@ void mutate_node(struct genome *genome)
 	struct node_gene *from, *to;
 	while (1)
 	{
-		from = (struct node_gene *)hashmap_get(genome->node_genes, ((double)rand() / (double)RAND_MAX) % innovation_number);
-		to = (struct node_gene *)hashmap_get(genome->node_genes, ((double)rand() / (double)RAND_MAX) % innovation_number);
+		from = (struct node_gene *)hashmap_get(genome->node_genes, rand() % innovation_number);
+		to = (struct node_gene *)hashmap_get(genome->node_genes, rand() % innovation_number);
 		
 		if (from->id == to->id)
 		{
@@ -112,19 +117,20 @@ void mutate_node(struct genome *genome)
 		int exist = 0;
 
 		for (
-			struct hashmap_iterator *iter = hasmap_iterator(genome->connection_genes);
+			struct hashmap_iterator *iter = hashmap_iterator(genome->connection_genes);
 			iter != NULL;
 			iter = hashmap_iterator_next(genome->connection_genes, iter)
 		)
 		{
-			if (iter->entry->in->id == from->id && iter->entry->out->id == to->id)
+			struct connection_gene *curr = iter->entry->value;
+			if (curr->in->id == from->id && curr->out->id == to->id)
 			{
 				exist = 1;
 				break;
 			}
 
 			/* also check if there exist a backwards connection */
-			if (iter->entry->in->id == to->id && iter->entry->out->id == from->id)
+			if (curr->in->id == to->id && curr->out->id == from->id)
 			{
 				exist = 1;
 				break;
@@ -138,8 +144,8 @@ void mutate_node(struct genome *genome)
 
 		/* check that this connection */
 		/* won't create circular dependency */
-		struct list *check;
-		if ((check = malloc(sizeof(struct list))) == NULL)
+		struct list *list;
+		if ((list = malloc(sizeof(struct list))) == NULL)
 		{
 			return;
 		}
@@ -167,7 +173,8 @@ void mutate_node(struct genome *genome)
 				iter = hashmap_iterator_next(genome->connection_genes, iter)
 			)
 			{
-				if (iter->entry->in->id == list->head->data)
+				struct connection_gene *curr = iter->entry->value;
+				if (curr->in->id == list->head->data)
 				{
 					struct node *n;
 					if ((n = malloc(sizeof(struct node))) == NULL)
@@ -175,7 +182,7 @@ void mutate_node(struct genome *genome)
 						return;
 					}
 
-					n->data = iter->entry->out->id;
+					n->data = curr->out->id;
 					n->next = NULL;
 					list->tail->next = n;
 					list->tail = n;
